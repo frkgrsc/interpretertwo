@@ -349,6 +349,12 @@ io.on('connection', (socket) => {
     });
 
 });
+app.use(express.static(__dirname)); // Bu satır, tüm dosyaları kök dizinden sunar
+
+// Ana sayfa yönlendirmesi
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 
 // ... (server listen remains the same) ...
 const PORT = process.env.PORT || 3000;
