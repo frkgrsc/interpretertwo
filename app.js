@@ -96,6 +96,8 @@ function handleUserLeave(socketId, specificRoomName = null, kicked = false, kick
 io.on('connection', (socket) => {
     console.log('A new user connected:', socket.id);
 
+     socket.emit('id', socket.id);
+
     // Kullanıcının şu anki odasını takip etmek için
     let currentUserRoom = null;
     // Kullanıcının kendi bilgilerini saklamak için (isAdmin kontrolü için)
