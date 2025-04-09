@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Socket.IO Chat</title>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io();
-
-    // Sunucuya mesaj gönderme
-    function sendMessage() {
-      var message = document.getElementById('message').value;
-      socket.emit('chat message', message);
-      document.getElementById('message').value = ''; // Mesaj kutusunu temizle
-    }
-
-    // Sunucudan gelen mesajı dinleme
-    socket.on('chat message', function(msg){
-      var newMessage = document.createElement('li');
-      newMessage.textContent = msg;
-      document.getElementById('messages').appendChild(newMessage);
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Bağlantısı</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #userId {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <h1>Socket.IO Chat</h1>
-  <ul id="messages"></ul>
-  <input id="message" autocomplete="off">
-  <button onclick="sendMessage()">Send</button>
+    <h1>Socket.IO Bağlantısı</h1>
+    <p>Bağlantı ID'niz: <span id="userId">Yükleniyor...</span></p>
+
+    <script>
+        const socket = io();
+
+        // Sunucudan ID'yi al
+        socket.on('id', (id) => {
+            // ID'yi sayfada göster
+            document.getElementById('userId').textContent = id;
+        });
+    </script>
 </body>
 </html>
+
